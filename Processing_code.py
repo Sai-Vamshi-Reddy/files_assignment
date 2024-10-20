@@ -134,3 +134,42 @@ def list_universities_by_state(data, state_name):
 
     if not found_university:
         print("No universities found in", state_name)
+
+
+# Function to save book titles in a specific category to a text file
+def save_books_by_category(data, category_choice):
+    if data is None:
+        print("No data available.")
+        return
+
+    found_book = False
+    file = open(category_choice + '_books.txt', mode='w')
+
+    for record in data:
+        for adoption in record['adoptions']:
+            if adoption['book']['category'] == category_choice:
+                file.write(adoption['book']['title'] + '\n')
+                found_book = True
+
+    file.close()
+
+    if not found_book:
+        print("No books found in the category:", category_choice)
+    else:
+        print("Books in the '" + category_choice + "' category saved to a text file.")
+
+
+def demonstrate_function():
+    file_path = input("Enter the file path of the JSON file: ")
+    data = open_json_file(file_path)
+
+    if data is not None:
+        state = input("Enter a state name to list universities: ")
+        list_universities_by_state(data, state)
+
+        category_choice = input("Enter a category to save book titles: ")
+        save_books_by_category(data, category_choice)
+        save_all_data_to_csv(data)
+
+if __name__ == "__main__":
+    demonstrate_function()
