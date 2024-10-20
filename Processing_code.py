@@ -89,7 +89,7 @@ def save_adoptions_to_csv(data):
     file.close()
     print("Adoption data saved to CSV.") 
 
-    # Function to save the messages data to a CSV file
+# Function to save the messages data to a CSV file
 def save_messages_to_csv(data):
     if data is None:
         return
@@ -108,4 +108,29 @@ def save_messages_to_csv(data):
             ])
 
     file.close()
-    print("Message data saved to CSV.")
+    print("Message data saved to CSV.") 
+
+def save_all_data_to_csv(data):
+    save_universities_to_csv(data)
+    save_contacts_to_csv(data)
+    save_adoptions_to_csv(data)
+    save_messages_to_csv(data)
+
+
+# Function to list universities based on the state
+def list_universities_by_state(data, state_name):
+    if data is None:
+        print("No data available.")
+        return
+
+    found_university = False
+    print("Universities in", state_name, ":")
+
+    for record in data:
+        university = record['university']
+        if university['state'] == state_name:
+            print(university['name'])
+            found_university = True
+
+    if not found_university:
+        print("No universities found in", state_name)
