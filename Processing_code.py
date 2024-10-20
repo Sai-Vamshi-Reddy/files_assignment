@@ -44,4 +44,25 @@ def save_universities_to_csv(data):
 
     file.close()
     print("University data saved to CSV.")
+
+ # Function to save the contacts data to a CSV file
+def save_contacts_to_csv(data):
+    if data is None:
+        return
+
+    file = open('sai_vamshi_contacts.csv', mode='w', newline='')
+    writer = csv.writer(file)
+    writer.writerow(['Contact Order', 'Gender', 'First Name', 'Last Name'])
+
+    for record in data:
+        for contact in record['contacts']:
+            writer.writerow([
+                contact['order'],
+                contact['gender'],
+                contact['firstname'],
+                contact['lastname']
+            ])
+
+    file.close()
+    print("Contact data saved to CSV.")
  
