@@ -66,3 +66,25 @@ def save_contacts_to_csv(data):
     file.close()
     print("Contact data saved to CSV.")
  
+ # Function to save the adoptions data to a CSV file
+def save_adoptions_to_csv(data):
+    if data is None:
+        return
+
+    file = open('sai_vamshi_adoptions.csv', mode='w', newline='')
+    writer = csv.writer(file)
+    writer.writerow(['Adoption ID', 'Date', 'Quantity', 'Book Id', 'Book Title', 'Category'])
+
+    for record in data:
+        for adoption in record['adoptions']:
+            writer.writerow([
+                adoption['id'],
+                adoption['date'],
+                adoption['quantity'],
+                adoption['book']['id'],
+                adoption['book']['title'],
+                adoption['book']['category']
+            ])
+
+    file.close()
+    print("Adoption data saved to CSV.")
