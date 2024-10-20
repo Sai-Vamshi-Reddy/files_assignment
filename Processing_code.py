@@ -87,4 +87,25 @@ def save_adoptions_to_csv(data):
             ])
 
     file.close()
-    print("Adoption data saved to CSV.")
+    print("Adoption data saved to CSV.") 
+
+    # Function to save the messages data to a CSV file
+def save_messages_to_csv(data):
+    if data is None:
+        return
+
+    file = open('sai_vamshi_messages.csv', mode='w', newline='')
+    writer = csv.writer(file)
+    writer.writerow(['Message ID', 'Message Date', 'Content', 'Category'])
+
+    for record in data:
+        for message in record['messages']:
+            writer.writerow([
+                message['id'],
+                message['date'],
+                message['content'],
+                message['category']
+            ])
+
+    file.close()
+    print("Message data saved to CSV.")
